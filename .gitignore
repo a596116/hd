@@ -1,0 +1,43 @@
+.DS_Store
+node_modules
+/dist
+stats.html
+# local env files
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+# .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+#docker
+.devcontainer
+yarn.lock
+
+
+#Vscode setting
+#This need to be ignore because everyone has his own settings.
+
+# to ignore your .vscode
+# git rm -r --cached .  and git add .
+
+.vscode/*
+
+# exclude local build
+dist
+
+# d.ts
+types/auto-imports.d.ts
+types/components.d.ts
