@@ -47,12 +47,6 @@ function emptyDir(dir: string) {
   if (!fs.existsSync(dir)) {
     return
   }
-
-  //   postOrderDirectoryTraverse(
-  //     dir,
-  //     (dir) => fs.rmdirSync(dir),
-  //     (file) => fs.unlinkSync(file)
-  //   )
 }
 
 async function init() {
@@ -158,8 +152,6 @@ async function init() {
     process.exit(1)
   }
 
-  // `initial` won't take effect if the prompt type is null
-  // so we still have to assign the default values here
   const {
     projectName,
     packageName = projectName ?? defaultProjectName,
