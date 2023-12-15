@@ -1,0 +1,38 @@
+.el-menu {
+  --el-menu-base-level-padding: 14px !important;
+  --el-menu-item-height: 44px !important;
+  --el-menu-sub-item-height: 44px !important;
+}
+
+.el-menu--popup {
+  border-radius: 0.5rem !important;
+  padding: 0px !important;
+  min-width: 120px;
+  * {
+    color: var(--hd-text-50);
+  }
+  .el-menu-item {
+    @apply rounded-md;
+    &:hover {
+      @apply text-hd-primary-hover;
+      span,
+      svg,
+      * {
+        @apply text-hd-primary-hover;
+      }
+    }
+    &.is-active {
+      @apply text-hd-white;
+      background-color: var(--hd-primary-hover) !important;
+      span,
+      svg,
+      * {
+        @apply text-hd-white;
+      }
+    }
+  }
+}
+
+.el-menu--collapse .el-sub-menu__icon-arrow {
+  @apply hidden;
+}

@@ -1,0 +1,227 @@
+// form
+.hd-form {
+  .el-form-item {
+    @apply relative pt-7;
+  }
+  .el-form-item__label {
+    @apply absolute left-2 top-8  duration-200;
+  }
+  .el-form-item__label:has(+ .el-form-item__content .el-input__wrapper.is-focus) {
+    @apply text-hd-primary  top-1;
+  }
+  .el-form-item.is-error .el-input__wrapper {
+    box-shadow: none !important;
+  }
+  .el-input__wrapper {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #b9b9b9 !important;
+    border-radius: 0px !important;
+    &:before,
+    &:after {
+      content: '';
+      @apply bg-hd-primary absolute bottom-[0px] h-[2px] w-0;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+    &:before {
+      left: 50%;
+    }
+    &:after {
+      right: 50%;
+    }
+    &.is-focus {
+      &:before,
+      &:after {
+        @apply w-1/2;
+      }
+    }
+  }
+  .el-form-item__label:has(+ .el-form-item__content .el-input__wrapper .el-input__inner:valid),
+  .el-form-item__label:has(
+      + .el-form-item__content .el-input__wrapper .el-input__inner:valid:read-only
+    ),
+  .el-form-item__label:has(
+      + .el-form-item__content .only .el-input__wrapper .el-input__inner:not(:placeholder-shown)
+    ),
+  .el-form-item__label:has(
+      + .el-form-item__content
+        .el-select
+        .el-input__wrapper
+        .el-input__inner:not(:placeholder-shown)
+    ) {
+    @apply text-hd-primary  top-2;
+  }
+
+  .el-input__inner::placeholder {
+    @apply opacity-0;
+  }
+
+  // 自動選擇 去除背影
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset; //我这里的body背景色是#f8f8f8f
+  }
+}
+
+.custom-form {
+  .el-input__wrapper {
+    box-shadow: 0 0 0 1px var(--el-input-border-color, var(--el-border-color)) inset !important;
+  }
+  .el-row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .el-form-item {
+    margin-bottom: 1.6rem;
+  }
+
+  .contactor-table {
+    .el-form-item {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .el-form-item.remove-label-width {
+    .el-form-item__label-wrap {
+      margin-right: 0 !important;
+    }
+  }
+
+  &-editable {
+    background-color: var(--form-editable-bg);
+
+    .el-divider__text {
+      background-color: var(--form-editable-bg);
+    }
+  }
+
+  &-view {
+    background-color: var(--form-view-bg);
+
+    .el-divider__text {
+      background-color: var(--form-view-bg);
+    }
+  }
+
+  // .el-input-number {
+  //   width: 70%;
+  // }
+  .el-input-number {
+    width: 100%;
+  }
+
+  .el-input-number.is-controls-right {
+    .el-input-number__increase,
+    .el-input-number__decrease {
+      border: none !important;
+      background-color: transparent;
+    }
+  }
+
+  .w-full-date {
+    width: 100%;
+
+    .el-input__wrapper {
+      width: 100%;
+    }
+  }
+
+  .w-full-select {
+    width: 100%;
+  }
+}
+
+.input-rate.el-input-number {
+  width: 100%;
+}
+
+.w-full-cascader {
+  width: 100%;
+
+  .el-cascader {
+    width: 100%;
+  }
+}
+
+.el-form {
+  .el-cascader:not(.is-disabled):hover .el-input__wrapper {
+    // box-shadow: none !important;
+  }
+}
+
+.w-full-date {
+  width: 100%;
+
+  .el-input__wrapper {
+    width: 100%;
+  }
+
+  .el-date-editor.el-input {
+    width: 100%;
+  }
+}
+
+.date-bg-style {
+  .el-date-editor.el-input__inner {
+    box-shadow: none !important;
+  }
+}
+
+.custom-input-bg-style {
+  .is-guttered {
+    padding: 0;
+  }
+
+  .el-col {
+    width: 100%;
+  }
+
+  .el-input__wrapper {
+    box-shadow: none;
+    // background-color: var(--form-input-bg) !important;
+  }
+}
+
+.custom-input-bg-style.el-input.is-disabled {
+  .el-input__wrapper {
+    background-color: var(--hd-disable) !important;
+    box-shadow: none !important;
+  }
+}
+
+.el-textarea.is-disabled .el-textarea__inner,
+.custom-input-bg-style .el-input.is-disabled {
+  .el-input__wrapper {
+    box-shadow: none !important;
+  }
+}
+
+.custom-form {
+  .el-textarea.is-disabled .el-textarea__inner,
+  .el-input.is-disabled .el-input__inner {
+    color: var(--primary-text-color) !important;
+  }
+
+  .link-input.el-input.is-disabled .el-input__inner {
+    color: var(--el-color-primary) !important;
+  }
+
+  .el-textarea__inner:focus,
+  .el-input__wrapper.is-focus,
+  .el-cascader .el-input.is-focus .el-input__wrapper {
+    box-shadow: 0px 0px 5px var(--hd-primary) !important;
+  }
+
+  .el-form-item.is-error .el-input__wrapper {
+    box-shadow: 0 0 5px var(--el-color-danger) !important;
+  }
+
+  .alert-currency .el-input__wrapper {
+    .el-input__inner {
+      color: #f36666 !important;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "#/*": ["./src/assets/*"]
+    },
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "types/module.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "src/*.vue",
+    "vite.config.ts",
+    "vite/**/*.ts",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "types/components.d.ts",
+    "src/**/*.json"
+  ]
+}

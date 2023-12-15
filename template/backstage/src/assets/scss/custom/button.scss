@@ -1,0 +1,183 @@
+.custom-plain-button--green.is-disabled,
+.custom-plain-button--green.is-disabled:hover {
+  color: #cdecdc;
+  border-color: #cdecdc;
+}
+
+.custom-plain-button--primary.is-disabled,
+.custom-plain-button--primary.is-disabled:hover {
+  color: #b3dff4;
+  border-color: #b3dff4;
+}
+
+.el-button {
+  --el-button-hover-text-color: var(--hd-primary) !important;
+  --el-button-active-text-color: var(--hd-primary) !important;
+  --el-button-hover-border-color: var(--hd-primary) !important;
+  --el-button-active-border-color: #ffffff00 !important;
+  --el-button-outline-color: #ffffff00 !important;
+  --el-button-hover-bg-color: #ffffff00 !important;
+}
+.el-button--primary {
+  --el-button-bg-color: var(--hd-primary) !important;
+  --el-button-hover-text-color: var(--el-color-white) !important;
+  --el-button-border-color: var(--hd-primary) !important;
+  --el-button-outline-color: var(--hd-primary) !important;
+  --el-button-active-color: var(--hd-primary) !important;
+  --el-button-hover-link-text-color: var(--el-color-primary-light-5) !important;
+  --el-button-hover-bg-color: var(--hd-primary-hover) !important;
+  --el-button-hover-border-color: var(--hd-primary-hover) !important;
+  --el-button-active-text-color: var(--el-color-white) !important;
+  --el-button-active-bg-color: var(--hd-primary-active) !important;
+  --el-button-active-border-color: var(--hd-primary-active) !important;
+  --el-button-disabled-bg-color: var(--hd-disable) !important;
+  --el-button-disabled-border-color: var(--hd-disable) !important;
+}
+
+//
+.el-button.is-text {
+  // border-width: 1px;
+  // border-style: solid;
+  // border-color: color-mix(
+  //   in srgb,
+  //   var(--el-button-text-color) 30%,
+  //   transparent
+  // );
+}
+.button-tip.el-button:not(.is-text) {
+  border: none;
+  background-color: transparent;
+}
+.button-tip.el-button:not(.is-text):hover,
+.button-tip.el-button:not(.is-text):focus {
+  background-color: transparent;
+  opacity: 0.6;
+  // color: var(--el-button-text-color) !important;
+}
+.el-button.is-text:not(.is-disabled):focus,
+.el-button.is-text:not(.is-disabled):hover {
+  background-color: transparent;
+}
+
+.el-button--default.is-text {
+  @apply relative;
+  background-color: transparent !important;
+  &::before {
+    content: '';
+    @apply absolute left-0 top-0 z-0 h-full w-full;
+    background-color: color-mix(in srgb, var(--primary-text-color) 30%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 1;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &:hover,
+  &:focus {
+    @apply text-hd-text;
+  }
+}
+
+.el-button--primary.is-text {
+  @apply relative;
+  &::before {
+    content: '';
+    @apply absolute left-0 top-0 z-0 h-full w-full;
+    background-color: color-mix(in srgb, var(--el-color-primary) 30%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 1;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &:hover,
+  &:focus {
+    @apply text-hd-primary;
+  }
+}
+.el-button--danger.is-text {
+  @apply relative;
+  &::before {
+    content: '';
+    @apply absolute left-0 top-0 z-0 h-full w-full;
+    background-color: color-mix(in srgb, var(--el-color-danger) 20%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 1;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &:hover,
+  &:focus {
+    @apply text-hd-danger;
+  }
+}
+.el-button--success.is-text {
+  @apply relative;
+  &::before {
+    content: '';
+    @apply absolute left-0 top-0 z-0 h-full w-full;
+    background-color: color-mix(in srgb, var(--el-color-success) 20%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 1;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &:hover,
+  &:focus {
+    @apply text-hd-success;
+  }
+}
+.el-button--info.is-text {
+  @apply relative;
+  &::before {
+    content: '';
+    @apply absolute left-0 top-0 z-0 h-full w-full;
+    background-color: color-mix(in srgb, var(--el-color-info) 20%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 1;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &:hover,
+  &:focus {
+    @apply text-hd-white-50;
+  }
+}

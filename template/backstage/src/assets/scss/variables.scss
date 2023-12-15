@@ -1,0 +1,108 @@
+@use './custom/badge.scss' as *;
+@use './custom/button.scss' as *;
+@use './custom/form.scss' as *;
+@use './custom/input.scss' as *;
+@use './custom/messageBox.scss' as *;
+@use './custom/dropDown.scss' as *;
+@use './custom/menu.scss' as *;
+@use './custom/dialog.scss' as *;
+@use './custom/notification.scss' as *;
+@import './custom/button.scss';
+
+:root:root {
+  // 變量
+  //---------------------------------------------
+  --hd-primary: #bfccb5;
+  --hd-primary-hover: #adbb9b;
+  --hd-primary-active: #aac8a7;
+  --hd-secondary: #6c757d;
+  --hd-success: #52c980;
+  --hd-danger: #d14654;
+  --hd-warning: #ffeeb3;
+  --hd-info: #45bbcd;
+  --hd-light: #f8f9fa;
+  --hd-text: #3c486b;
+  --hd-text-50: #2c344f;
+  --hd-dark: #343a40;
+  --hd-dark-50: #4b535b;
+  --hd-white: #ffffff;
+  --hd-white-50: #ffffff80;
+  --hd-disable: #e9edc9;
+  --hd-border: #dfdfdf;
+  --hd-bg: #f8f9fa;
+  --hd-bg-1: #f4f4f4;
+  // font
+  --font-h1: 40px;
+  --font-h2: 32px;
+  --font-h3: 28px;
+  --font-h4: 24px;
+  --font-h5: 20px;
+  --font-h6: 16px;
+  --font-blockquote: 20px;
+  --font-body: 16px;
+  --font-samll: 14px;
+
+  // 變更 element plus 主色
+  --el-color-primary: var(--hd-primary);
+  --el-color-danger: var(--hd-danger);
+  --el-color-success: var(--hd-success);
+  --el-color-warning: var(--hd-warning);
+  --el-color-info: var(--hd-info);
+  --primary-text-color: var(--hd-text);
+  --blue-primary-50: #f8fbff;
+  --blue-primary-100: #e3f1ff;
+  --blue-primary-400: #464f5e;
+  --blue-primary-500: var(--hd-primary);
+  --table-row-bg: var(--hd-primary);
+  --table-expand-row-bg: var(--hd-bg);
+  --table-expand-hover-row-bg: #c8c8c8;
+  --search-input-bg: rgba(232, 240, 254, 0.6);
+  --form-input-bg: #cfd4d785;
+  --form-view-bg: var(--hd-primary);
+  --el-border-radius-base: 8px;
+  --form-editable-bg: #e3eada;
+  --el-disabled-bg-color: #ececec;
+  --el-menu-hover-bg-color: none;
+  --el-bg-color: #f8f9fa;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// badge
+.el-input__wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.el-loading-spinner {
+  background: url('/logo.png') no-repeat;
+  background-size: 8rem 9rem;
+  background-position: 50% 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0 !important;
+  text-align: center;
+  animation: bounce 2s infinite;
+}
+
+.el-loading-spinner .el-loading-text {
+  margin: 3px 0;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 60%;
+}
+.el-loading-spinner .circular {
+  display: none !important;
+}
+
+.el-drawer__body {
+  padding: 0 !important;
+}

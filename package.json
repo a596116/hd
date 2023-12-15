@@ -1,10 +1,10 @@
 {
-  "name": "hd",
+  "name": "create-haodai",
   "version": "1.0.0",
-  "description": "hd-cli",
+  "description": "haodai-cli",
   "type": "module",
   "bin": {
-    "hd-cli": "dist/index.mjs"
+    "create-haodai": "dist/index.mjs"
   },
   "files": [
     "template",
@@ -19,9 +19,11 @@
   "author": "WangHaoDai",
   "license": "ISC",
   "devDependencies": {
+    "@types/gradient-string": "^1.1.5",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "cross-spawn": "^7.0.3",
+    "gradient-string": "^2.0.2",
     "kolorist": "^1.8.0",
     "minimist": "^1.2.8",
     "prompts": "^2.4.2",

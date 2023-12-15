@@ -185,7 +185,7 @@ async function init() {
 
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
-  const templateRoot = path.resolve(__dirname, 'template')
+  const templateRoot = path.resolve(__dirname, '../', 'template')
   const callbacks: any = []
   const render = function render(templateName: string) {
     const templateDir = path.resolve(templateRoot, templateName)

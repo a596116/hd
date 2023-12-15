@@ -1,0 +1,9 @@
+.el-dropdown-menu {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: 4px !important;
+}
+.el-dropdown-menu__item {
+  border-radius: var(--el-border-radius-base) !important;
+}

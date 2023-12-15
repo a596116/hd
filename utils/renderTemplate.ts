@@ -68,24 +68,6 @@ function renderTemplate(src, dest, callbacks) {
     return
   }
 
-  // data file for EJS templates
-  if (filename.endsWith('.data.mjs')) {
-    // use dest path as key for the data store
-    dest = dest.replace(/\.data\.mjs$/, '')
-
-    // Add a callback to the array for late usage when template files are being processed
-    callbacks.push(async (dataStore) => {
-      const getData = (await import(pathToFileURL(src).toString())).default
-
-      // Though current `getData` are all sync, we still retain the possibility of async
-      dataStore[dest] = await getData({
-        oldData: dataStore[dest] || {},
-      })
-    })
-
-    return // skip copying the data file
-  }
-
   fs.copyFileSync(src, dest)
 }
 
