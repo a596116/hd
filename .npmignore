@@ -1,4 +1,4 @@
 /node_modules
 npm-debug.log
-/template/**/.env.development
-/template/**/.env.production
+.env.development
+.env.production

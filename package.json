@@ -10,14 +10,18 @@
     "template",
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a596116/hd.git"
+  },
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
-  "author": "WangHaoDai",
-  "license": "ISC",
+  "author": "WangHaoDai <a596116@gmail.com>",
+  "license": "MTI",
   "devDependencies": {
     "@types/gradient-string": "^1.1.5",
     "@types/minimist": "^1.2.5",
