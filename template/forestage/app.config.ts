@@ -4,4 +4,10 @@ export default defineAppConfig({
     name: '',
     link: '',
   },
+
+  // nuxtui
+  ui: {
+    strategy: 'override',
+    primary: 'hd',
+  }
 })

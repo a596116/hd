@@ -8,7 +8,6 @@ declare global {
     VITE_APP_TITLE: string
     VITE_APP_PORT: number
     VITE_APP_DOMAIN: string
-    VITE_LIFF_ID: string
   }
 
   type EmitType = (event: string, ...args: any[]) => void

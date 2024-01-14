@@ -1,4 +1,4 @@
-import type { NuxtConfig } from '@nuxt/schema'
+import type { NuxtConfig } from 'nuxt/schema'
 import { useEnv } from './env'
 export const createRuntimeConfig = (): NuxtConfig['runtimeConfig'] => {
   const { viteEnv } = useEnv()

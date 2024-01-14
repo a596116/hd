@@ -11,8 +11,7 @@ useHead({
 
 <template>
   <Html :lang="locale">
-    <Body class="text-hd-black bg-hd-white antialiased transition-colors duration-300">
-      <Navbar class="lg:justify-between" />
+    <Body class="relative bg-hd-white text-hd-dark antialiased transition-colors duration-300">
       <NuxtLayout>
         <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" />
         <NuxtPage />
@@ -20,4 +19,3 @@ useHead({
     </Body>
   </Html>
 </template>
-<style src="~/assets/sass/_variables.scss"></style>

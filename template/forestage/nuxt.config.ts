@@ -16,19 +16,23 @@ export default defineNuxtConfig({
   telemetry: false,
   // modules
   modules: [
-    '@element-plus/nuxt',
+    '@nuxt/ui',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-lodash',
-    '@vueuse/nuxt',
-    '@nuxt/image-edge',
-    '@nuxtjs/robots',
+    "@nuxt/image",
   ],
-  // sitemap: sitemap,
 
   // css
-  css: ['~/assets/sass/tailwind.scss', 'animate.css/animate.min.css', '~/assets/sass/app.scss'],
+  css: [
+    '~/assets/sass/app.scss',
+    '~/assets/sass/tailwind.scss',
+    '~/assets/sass/variables.scss',
+  ],
+  colorMode: {
+    preference: 'light'
+  },
   // app config
   app: {
     // global transition
@@ -59,16 +63,6 @@ export default defineNuxtConfig({
     },
   },
 
-  robots: {
-    rules: [
-      {
-        UserAgent: '*',
-        Disallow: '/',
-      },
-    ],
-  },
-
-  // vite
   vite: createViteConfig(),
 
   runtimeConfig: createRuntimeConfig(),

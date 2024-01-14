@@ -3,6 +3,7 @@
   <swiper
     :speed="900"
     :parallax="true"
+    :modules="[Autoplay, Pagination, Parallax, Navigation, EffectFade]"
     :autoplay="option.autoplay"
     :pagination="option.pagination"
     :navigation="true"
@@ -13,7 +14,7 @@
     <swiper-slide v-for="item of content" :key="item.title">
       <img :src="item.image" class="banner-bg parallax-bg block object-cover" />
       <div
-        class="banner-inner text-hd-primary absolute flex flex-col"
+        class="banner-inner absolute flex flex-col text-hd-primary"
         :class="{
           '-translate-x-[50%]': item.align === 'center',
           '-translate-x-[50%] lg:translate-x-[120%]': item.align === 'right',
@@ -29,20 +30,13 @@
 </template>
 
 <script setup lang="ts">
-import 'swiper/swiper.css'
+import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
-import SwiperCore, {
-  Autoplay,
-  Pagination,
-  Parallax,
-  SwiperOptions,
-  Navigation,
-  EffectFade,
-} from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-SwiperCore.use([Autoplay, Pagination, Parallax, Navigation, EffectFade])
+import type { SwiperOptions } from 'swiper/types'
+import { Autoplay, EffectFade, Navigation, Pagination, Parallax } from 'swiper/modules'
 
 const option: SwiperOptions = {
   autoplay: {
@@ -56,7 +50,7 @@ const option: SwiperOptions = {
 
 const content = [
   {
-    title: '前端網頁小白',
+    title: '',
     image: 'https://i.imgur.com/YRWcNbY.jpg',
     align: 'center',
   },
@@ -89,10 +83,10 @@ const content = [
 }
 
 :deep(.swiper-button-prev) {
-  @apply text-hd-white left-5 h-[20%] w-10 -translate-x-20 -translate-y-1/2 duration-300;
+  @apply left-5 h-[20%] w-10 -translate-x-20 -translate-y-1/2 text-hd-white duration-300;
 }
 :deep(.swiper-button-next) {
-  @apply text-hd-white right-5 h-[20%] w-10 -translate-y-1/2 translate-x-20 duration-300;
+  @apply right-5 h-[20%] w-10 -translate-y-1/2 translate-x-20 text-hd-white duration-300;
 }
 .banner:hover {
   :deep(.swiper-button-prev),

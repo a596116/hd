@@ -110,7 +110,7 @@ import { gsap, ScrollTrigger } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger)
 
-onMounted(() => {
+onNuxtReady(() => {
   gsap
     .timeline({
       scrollTrigger: {
@@ -138,7 +138,6 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  // background: var(--hd-black);
   span {
     position: absolute;
     display: block;
@@ -167,7 +166,7 @@ onMounted(() => {
     height: 1.2vh;
     width: 50%;
     margin-bottom: -0.2vh;
-    background: var(--hd-black);
+    background: var(--hd-dark);
     display: block;
   }
 }

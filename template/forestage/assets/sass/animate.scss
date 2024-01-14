@@ -1,0 +1,148 @@
+// slide-fade
+.slide-fade-enter-active {
+  animation: slide-in 0.5s ease-in forwards;
+}
+
+.slide-fade-leave-active {
+  animation: slide-out 0.7s ease-out forwards;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+@keyframes slide-in {
+  from {
+    transition: opacity 1.5s;
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(30px);
+  }
+}
+
+// top-slide-fade
+.top-slide-fade-enter-active {
+  animation: top-slide-in 0.5s ease-in forwards;
+}
+
+.top-slide-fade-leave-active {
+  animation: top-slide-out 0.7s ease-out forwards;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+@keyframes top-slide-in {
+  from {
+    transition: opacity 1.5s;
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes top-slide-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes dialog-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-close {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
+// 遮罩层动画
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+// page transition
+.page-enter-active {
+  transition: all 0.1s ease-out;
+}
+.page-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.page-enter-from,
+.page-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+// layout transition
+.layout-enter-active {
+  transition: all 0.1s ease-out;
+}
+.layout-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.layout-enter-from,
+.layout-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+// checkout transition
+.checkout-up-enter-active,
+.checkout-down-enter-active {
+  transition: all 0.1s ease-out;
+  transition-delay: 0.2s;
+}
+.checkout-up-leave-active,
+.checkout-down-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.checkout-up-enter-from {
+  transform: translateX(40px);
+  opacity: 0;
+}
+.checkout-up-leave-to {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+.checkout-down-enter-from {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+.checkout-down-leave-to {
+  transform: translateX(40px);
+  opacity: 0;
+}

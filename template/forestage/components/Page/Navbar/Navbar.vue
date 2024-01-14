@@ -1,37 +1,40 @@
 <script lang="ts" setup>
 import gsap from 'gsap'
-import { menus } from '~/content/menus'
+import { menus, type Menu } from '~/content/menus'
 
-const childrenMenu = ref<any[]>([])
+const childrenMenu = ref<Menu[]>([])
+const childrenMenuImg = ref('')
 const handleClickMenu = (cmenu: any) => {
   childrenMenu.value = cmenu
 }
 const isOpen = ref(false)
 const openHeight = ref('44px')
 let tl: gsap.core.Timeline | null = null
-const dropdown = (type: boolean, cmenu?: any) => {
+const dropdown = (type: boolean, cmenu?: any, img?: string) => {
   if (type) {
     const max = Math.max(...cmenu.map((item: any) => item.children?.length || 0))
-    openHeight.value = max * 32 + 28 + 48 + 44 + 'px'
+    const hei = max * 32 + 48 + 48 + 64
+    openHeight.value = hei < 450 ? '450px' : hei + 'px'
     isOpen.value = true
     if (childrenMenu.value != toRef(cmenu).value) {
       childrenMenu.value = cmenu
+      childrenMenuImg.value = img || ''
       tl?.clear()
       nextTick(() => {
         tl = gsap.timeline({
           paused: true,
-          defaults: { duration: 0.1, ease: 'power1.inOut' },
+          defaults: { duration: 0.3, ease: 'power1.inOut' },
         })
         tl.fromTo(
           '.cmenu-item',
-          { opacity: 0, y: '-0.5em', stagger: 0.1 },
-          { opacity: 1, y: '0em', stagger: 0.1 },
+          { opacity: 0, x: '-1em', stagger: 0.1 },
+          { opacity: 1, x: '0em', stagger: 0.1 },
           0,
         )
         tl.fromTo(
-          '.blur-bg',
-          { visibility: 'hidden', opacity: 0 },
-          { visibility: 'visible', opacity: 1 },
+          '.cmenu-img',
+          { opacity: 0, x: '1em', stagger: 0.1 },
+          { opacity: 1, x: '0em', stagger: 0.1 },
           0,
         )
         tl?.play()
@@ -41,6 +44,7 @@ const dropdown = (type: boolean, cmenu?: any) => {
     openHeight.value = '44px'
     isOpen.value = false
     childrenMenu.value = []
+    childrenMenuImg.value = ''
     tl?.reverse()
   }
 }
@@ -79,18 +83,17 @@ const dropdown = (type: boolean, cmenu?: any) => {
                   :hover="false"
                   :duration="false"
                   @click="dropdown(false)"
-                  @mouseenter="dropdown(true, item.children)" />
+                  @mouseenter="dropdown(true, item.children, item.img)" />
                 <span
                   v-else
-                  :to="item.link ? item.link : undefined"
                   class="nav center flex-1 px-2 py-2 capitalize"
-                  @mouseenter="dropdown(true, item.children)">
+                  @mouseenter="dropdown(true, item.children, item.img)">
                   {{ item.name }}
                 </span>
               </li>
             </div>
           </ul>
-          <div class="cmenu flex gap-6">
+          <div class="cmenu flex gap-6 px-28">
             <section
               v-for="(item, index) in childrenMenu"
               :key="index"
@@ -109,15 +112,22 @@ const dropdown = (type: boolean, cmenu?: any) => {
                 @click="dropdown(false)"
                 class="text-lg text-white hover:text-white/50" />
             </section>
+            <Anchor
+              v-if="childrenMenuImg"
+              :to="`/`"
+              class="cmenu-img group m-6 h-[299px] w-[399px] overflow-hidden">
+              <NuxtImg
+                format="webp"
+                :src="childrenMenuImg"
+                alt="浩呆"
+                class="h-full w-full object-cover duration-500 group-hover:scale-105" />
+            </Anchor>
           </div>
         </nav>
       </div>
       <section class="blur-bg"></section>
     </template>
 
-    <template #icon>
-      <div class="text-hd-primary relative hidden gap-7 pl-4 lg:flex"></div>
-    </template>
     <template #drawer="{ toggleDrawer }">
       <div
         v-if="childrenMenu.length"
@@ -125,7 +135,7 @@ const dropdown = (type: boolean, cmenu?: any) => {
         class="center absolute top-0 h-[44px] w-[44px]">
         <svg-icon name="left" class="h-[30px] w-[30px] text-white"></svg-icon>
       </div>
-      <div class="text-hd-white h-screen pt-[44px]">
+      <div class="h-screen pt-[44px] text-hd-white">
         <!-- <Search type="open" class="my-4" /> -->
         <TransitionGroup name="checkout-up" appear>
           <nav v-if="childrenMenu?.length" class="flex flex-col gap-4 text-white/50">
@@ -138,10 +148,12 @@ const dropdown = (type: boolean, cmenu?: any) => {
                 class="flex items-center px-5 text-sm" />
               <div v-else class="flex flex-col gap-4">
                 <Anchor
+                  v-if="item.link"
                   :to="item.link"
                   :text="item.name"
                   @click="toggleDrawer()"
                   class="flex items-center px-5 text-sm" />
+                <span v-else class="mb-1 px-5 text-sm text-white/50">{{ item.name }}</span>
                 <div v-for="(citem, cindex) of item.children" :key="cindex">
                   <Anchor
                     :to="citem.link"
@@ -159,10 +171,6 @@ const dropdown = (type: boolean, cmenu?: any) => {
                 :key="i"
                 class="group flex cursor-pointer items-center font-bold duration-300">
                 <li class="menu relative flex h-full w-full items-center px-10 py-2">
-                  <svg-icon
-                    v-if="item.children?.length"
-                    name="plus"
-                    class="h-4 w-4 text-white"></svg-icon>
                   <Anchor
                     v-if="!item.children?.length"
                     :to="item.link ? item.link : undefined"
@@ -177,6 +185,10 @@ const dropdown = (type: boolean, cmenu?: any) => {
                     @click="handleClickMenu(item.children)"
                     >{{ item.name }}
                   </span>
+                  <svg-icon
+                    v-if="item.children?.length"
+                    name="arrow"
+                    class="h-4 w-4 text-white"></svg-icon>
                 </li>
               </div>
             </ul>
@@ -204,7 +216,8 @@ const dropdown = (type: boolean, cmenu?: any) => {
   }
 }
 .navbar {
-  @apply transition-[.5s];
+  // @apply transition-[.5s];
+  transition: height 0.4s cubic-bezier(0.37, -0.14, 0.55, 1.17);
   height: 44px;
   &.active {
     // height: 200px;
@@ -214,6 +227,11 @@ const dropdown = (type: boolean, cmenu?: any) => {
 .blur-bg {
   @apply absolute left-0 top-0 -z-10 h-screen w-full;
   visibility: hidden;
+  opacity: 0;
   backdrop-filter: blur(20px);
+}
+.navbar.active + .blur-bg {
+  visibility: visible;
+  opacity: 1;
 }
 </style>

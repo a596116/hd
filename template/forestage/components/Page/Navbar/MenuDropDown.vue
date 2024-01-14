@@ -66,7 +66,7 @@ const menu = toRef(props, 'menu')
   display: block;
 }
 .dropdown-menu {
-  @apply bg-hd-black absolute left-0 top-full min-h-[200px] w-full transition-[.5s,ease-in-out] duration-500;
+  @apply bg-hd-dark absolute left-0 top-full min-h-[200px] w-full transition-[.5s,ease-in-out] duration-500;
   visibility: hidden;
   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }

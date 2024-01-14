@@ -1,8 +1,8 @@
-import type { NuxtConfig } from '@nuxt/schema'
 import { useEnv } from '../env'
 import { createVitePlugins } from './plugins'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
+import type { NuxtConfig } from 'nuxt/schema'
 
 export const createViteConfig = (): NuxtConfig['vite'] => {
   const { viteEnv } = useEnv()

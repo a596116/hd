@@ -1,107 +1,47 @@
 /** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
 
-import defaultTheme from 'tailwindcss/defaultTheme'
-
-module.exports = {
-  content: [
-    './components/**/*.{vue,js,ts}',
-    './layouts/**/*.vue',
-    './pages/**/*.vue',
-    './composables/**/*.{js,ts}',
-    './plugins/**/*.{js,ts}',
-    './app.{js,ts,vue}',
-  ],
+export default <Partial<Config>>{
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   important: true,
-  // safelist: ["dark"],
-  // darkMode: "class",
   theme: {
-    screens: {
-      xs: '475px',
-      ...defaultTheme.screens,
-    },
-    fontSize: {
-      ...defaultTheme.fontSize,
-      h1: [
-        '2.5rem',
-        {
-          fontWeight: '500',
-          lineHeight: '3rem',
-        },
-      ],
-      h2: [
-        '2rem',
-        {
-          fontWeight: '500',
-          lineHeight: '2.375rem',
-        },
-      ],
-      h3: [
-        '1.75rem',
-        {
-          fontWeight: '500',
-          lineHeight: '2rem',
-        },
-      ],
-      h4: [
-        '1.5rem',
-        {
-          fontWeight: '500',
-          lineHeight: '1.75rem',
-        },
-      ],
-      h5: [
-        '1.25rem',
-        {
-          fontWeight: '500',
-          lineHeight: '1.5rem',
-        },
-      ],
-      h6: [
-        '1rem',
-        {
-          fontWeight: '500',
-          lineHeight: '1.25rem',
-        },
-      ],
-      body: [
-        '1rem',
-        {
-          fontWeight: '400',
-          lineHeight: '1.5rem',
-        },
-      ],
-      small: [
-        '0.875rem',
-        {
-          fontWeight: '400',
-          lineHeight: '1.25rem',
-        },
-      ],
-      tiny: [
-        '0.75rem',
-        {
-          fontWeight: '400',
-          lineHeight: '1.25rem',
-        },
-      ],
-    },
     extend: {
+      aspectRatio: {
+        auto: 'auto',
+        square: '1 / 1',
+        video: '16 / 9'
+      },
       colors: {
         hd: {
-          primary: 'var(--hd-primary)',
+          primary: 'var(--hd-primary-500)',
           success: 'var(--hd-success)',
-          secondary: 'var(--hd-secondary)',
-          hover: 'var(--hd-hover)',
-          click: 'var(--hd-click)',
-          bg: 'var(--hd-bg)',
-          black: 'var(--hd-black)',
-          'black-50': 'var(--hd-black-50)',
-          white: 'var(--hd-white)',
-          'white-50': 'var(--hd-white-50)',
-          disable: 'var(--hd-disable)',
           danger: 'var(--hd-danger)',
           warning: 'var(--hd-warning)',
           info: 'var(--hd-info)',
+          light: 'var(--hd-light)',
+          text: 'var(--hd-text)',
+          'text-50': 'var(--hd-text-50)',
+          dark: 'var(--hd-dark)',
+          'dark-50': 'var(--hd-dark-50)',
+          muted: 'var(--hd-muted)',
+          white: 'var(--hd-white)',
+          'white-50': 'var(--hd-white-50)',
+          disable: 'var(--hd-disable)',
+          border: 'var(--hd-border)',
+          bg: 'var(--hd-bg)',
+          'bg-1': 'var(--hd-bg-1)',
+          'bg-50': 'var(--hd-bg-50)',
+          50: '#c2ffbf',
+          100: '#a3d6a0',
+          200: '#98c596',
+          300: '#8ab088',
+          400: '#7d9e7b',
+          500: '#739072',
+          600: '#658064',
+          700: '#576d56',
+          800: '#475946',
+          900: '#394838',
+          950: '#283327',
         },
       },
       animation: {

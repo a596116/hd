@@ -1,0 +1,59 @@
+:root {
+  // 變量
+  //---------------------------------------------
+  --hd-primary: #739072;
+  --hd-primary-50: #c2ffbf;
+  --hd-primary-100: #a3d6a0;
+  --hd-primary-200: #98c596;
+  --hd-primary-300: #8ab088;
+  --hd-primary-400: #7d9e7b;
+  --hd-primary-500: #739072;
+  --hd-primary-600: #658064;
+  --hd-primary-700: #576d56;
+  --hd-primary-800: #475946;
+  --hd-primary-900: #394838;
+  --hd-primary-950: #283327;
+
+  --hd-text: #3c486b;
+  --hd-text-50: #2c344f;
+  --hd-dark: #343a40;
+  --hd-dark-50: #798189;
+  --hd-white: #ffffff;
+  --hd-white-50: #f1f1f1;
+  --hd-disable: color-mix(in srgb, var(--hd-dark) 10%, transparent);
+  --hd-border: #dfdfdf;
+  --hd-bg: #e8eaeb;
+  --hd-bg-1: #ffffff;
+  --hd-bg-50: rgb(240, 239, 239);
+  --hd-shadow: rgba(0, 0, 0, 0.1);
+  // font
+  --font-h1: 40px;
+  --font-h2: 32px;
+  --font-h3: 28px;
+  --font-h4: 24px;
+  --font-h5: 20px;
+  --font-h6: 16px;
+  --font-blockquote: 20px;
+  --font-body: 16px;
+  --font-samll: 14px;
+}
+:root.dark {
+  --hd-light: #343a40;
+  --hd-text: #ffffff;
+  --hd-text-50: #ffffff82;
+  --hd-dark: #cfd3dc;
+  --hd-dark-50: #ffffff82;
+  --hd-white: #343a40;
+  --hd-white-50: #4b535b;
+  --hd-border: #ececec;
+  --hd-bg: #1d1e20;
+  --hd-bg-1: #141414;
+  --hd-bg-50: #393a3c;
+  --hd-shadow: rgba(255, 255, 255, 0.323);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

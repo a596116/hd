@@ -15,7 +15,7 @@
       <svg-icon name="triangle" class="text-hd-primary h-6 w-6 -rotate-90" />
     </div>
     <div class="relative flex w-full justify-start px-6 py-2" v-if="style == 4">
-      <div class="border-hd-black border-l-4 pl-3">{{ title }}</div>
+      <div class="border-hd-dark border-l-4 pl-3">{{ title }}</div>
     </div>
     <div class="absolute right-0">
       <slot name="right"></slot>

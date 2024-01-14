@@ -36,7 +36,7 @@ const toggleDrawer = () => {
   <div ref="navbar" class="fixed top-0 z-[99] w-full flex-none duration-300">
     <div class="max-w-8xl mx-auto flex w-full flex-col items-center">
       <section
-        class="min-h-10 bg-hd-black [&:has(.navbar.active)]:bg-hd-black flex h-full w-full justify-center duration-500">
+        class="flex h-full min-h-10 w-full justify-center bg-hd-dark duration-500 [&:has(.navbar.active)]:bg-hd-dark">
         <div class="flex w-full">
           <!-- 小屏 -->
           <article class="flex h-[44px] w-full px-2 lg:hidden">
@@ -90,7 +90,7 @@ const toggleDrawer = () => {
   @apply relative left-0 right-[10px] flex h-[30px] w-[30px] cursor-pointer items-center justify-center overflow-hidden rounded-[10px] transition-[5s];
   z-index: 3000;
   span {
-    @apply bg-hd-white absolute h-[2px] w-[30px] rounded-[4px];
+    @apply absolute h-[2px] w-[30px] rounded-[4px] bg-hd-white;
     transition: 0.5s;
     &:nth-child(1) {
       transform: translateY(-10px);
@@ -123,7 +123,7 @@ const toggleDrawer = () => {
 }
 
 .drawer {
-  @apply bg-hd-black absolute top-0 h-screen w-full;
+  @apply absolute top-0 h-screen w-full bg-hd-dark;
   visibility: hidden;
 }
 </style>
