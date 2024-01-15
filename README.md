@@ -8,6 +8,6 @@
 ## Usage
 
 ```sh
-npm create haodai-cli
+npm create haodai
 ```
 
