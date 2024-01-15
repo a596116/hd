@@ -7,7 +7,7 @@
 @use './custom/menu.scss' as *;
 @use './custom/dialog.scss' as *;
 @use './custom/notification.scss' as *;
-@import './custom/button.scss';
+@use './custom/button.scss' as *;
 
 :root:root {
   // 變量

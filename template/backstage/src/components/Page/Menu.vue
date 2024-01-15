@@ -9,7 +9,7 @@
       <svg-icon name="logo" class="h-[60px] w-full" @click="handle({ route: 'admin' })"></svg-icon>
     </div>
 
-    <div class="" v-for="(menu, index) in menuStore.menus" :key="index">
+    <div class="px-2" v-for="(menu, index) in menuStore.menus" :key="index">
       <el-sub-menu v-if="menu.children?.length != 1" :index="menu.title!">
         <template #title>
           <section class="hidden md:block">
@@ -22,7 +22,9 @@
           :key="index"
           :index="cmenu?.route?.split('/')[1]"
           @click="handle(cmenu)">
-          <span class="menu-title">{{ cmenu.title }}</span>
+          <template #title>
+            <span class="menu-title">{{ cmenu.title }}</span>
+          </template>
         </el-menu-item>
       </el-sub-menu>
 
@@ -33,13 +35,15 @@
         <section class="hidden md:block">
           <svg-icon :name="menu.icon" class="h-5 w-5"></svg-icon>
         </section>
-        <span class="title mx-2 md:mx-4">{{ menu.children[0].title }}</span>
+        <template #title>
+          <span class="title mx-2 md:mx-4">{{ menu.children[0].title }}</span>
+        </template>
       </el-menu-item>
     </div>
   </el-menu>
   <div
     v-if="menuStore.isMenuCollapse"
-    class="absolute left-0 top-0 z-[11] h-full w-full bg-white/50 md:hidden"
+    class="absolute left-0 top-0 z-10 h-full w-full bg-white/40 md:hidden"
     @click="menuStore.toggleMenu"></div>
 </template>
 
@@ -71,9 +75,22 @@ watch(
 
 <style scoped lang="scss">
 .admin-menu {
-  @apply left-0 top-0 z-[12] mx-2 my-4 h-[calc(100vh-32px)] max-w-[190px] overflow-hidden rounded-xl border-0 px-1 max-md:absolute
+  @apply left-0 top-0 z-[51]  h-full max-w-[210px] overflow-hidden rounded-2xl border-0 max-md:absolute
         max-md:mt-[10px]  max-md:h-[calc(100vh-20px)];
   transition: width 0.3s ease-in-out;
+  .title {
+    @apply w-[120px];
+    // 超出...
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .el-sub-menu__title {
+    @apply relative;
+    .el-sub-menu__icon-arrow {
+      @apply absolute right-2;
+    }
+  }
   span,
   svg,
   * {
@@ -81,13 +98,14 @@ watch(
     transition: all 0.3s ease-in-out !important;
   }
   // Menu
-  :deep(.el-menu-item) {
+  :deep(.el-menu-item),
+  :deep(.el-sub-menu__title) {
     @apply rounded-lg;
     span,
     svg {
       background-color: transparent !important;
       color: var(--hd-text-50);
-      letter-spacing: 8px;
+      letter-spacing: 6px;
       // transition: 0.3s ease-in-out !important;
     }
 

@@ -25,7 +25,7 @@ export const menus: Menu[] = [
             name: 'LineBot',
             link: '/',
           },
-        ]
+        ],
       },
       {
         name: '分類',
@@ -42,9 +42,9 @@ export const menus: Menu[] = [
             name: 'LineBot',
             link: '/',
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     name: '測試',
@@ -90,7 +90,7 @@ export const menus: Menu[] = [
             name: '測試3',
             link: '/',
           },
-        ]
+        ],
       },
       {
         name: '測試',
@@ -131,9 +131,9 @@ export const menus: Menu[] = [
             name: '測試3',
             link: '/',
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     name: '作品',
@@ -155,9 +155,9 @@ export const menus: Menu[] = [
             name: 'LineBot',
             link: '/',
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     name: '文章',

@@ -1,11 +1,11 @@
 <template>
-  <div class="relative flex h-full w-full bg-hd-bg text-hd-dark">
+  <div class="relative flex h-full w-full items-center gap-3 bg-hd-bg p-3 text-hd-dark">
     <Menu />
     <el-container class="relative grid min-h-full">
-      <div class="content grid w-full grid-rows-[auto_1fr] bg-hd-bg bg-cover bg-no-repeat">
+      <div class="content grid w-full grid-rows-[auto_1fr]">
         <NavBar />
 
-        <main class="main relative mx-2 mb-2 h-full overflow-y-auto rounded-md bg-transparent">
+        <main class="main relative h-full overflow-y-auto rounded-2xl bg-hd-bg-1">
           <router-view #default="{ Component, route }">
             <Transition
               appear
