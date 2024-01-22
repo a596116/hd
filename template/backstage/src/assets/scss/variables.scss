@@ -7,30 +7,35 @@
 @use './custom/menu.scss' as *;
 @use './custom/dialog.scss' as *;
 @use './custom/notification.scss' as *;
+@use './custom/draggable.scss' as *;
 @use './custom/button.scss' as *;
+@use './custom/loading.scss' as *;
+@import './custom/table.scss';
 
 :root:root {
   // 變量
   //---------------------------------------------
-  --hd-primary: #bfccb5;
-  --hd-primary-hover: #adbb9b;
-  --hd-primary-active: #aac8a7;
+  --hd-primary: #289983;
+  --hd-primary-hover: #46b59f;
+  --hd-primary-active: #27816f;
   --hd-secondary: #6c757d;
-  --hd-success: #52c980;
-  --hd-danger: #d14654;
+  --hd-success: #a7c957;
+  --hd-danger: #ee3d6f;
   --hd-warning: #ffeeb3;
   --hd-info: #45bbcd;
   --hd-light: #f8f9fa;
   --hd-text: #3c486b;
   --hd-text-50: #2c344f;
   --hd-dark: #343a40;
-  --hd-dark-50: #4b535b;
+  --hd-dark-50: #798189;
   --hd-white: #ffffff;
-  --hd-white-50: #ffffff80;
-  --hd-disable: #e9edc9;
+  --hd-white-50: #f1f1f1;
+  --hd-disable: color-mix(in srgb, var(--hd-dark) 10%, transparent);
   --hd-border: #dfdfdf;
-  --hd-bg: #f8f9fa;
-  --hd-bg-1: #f4f4f4;
+  --hd-bg: #e8eaeb;
+  --hd-bg-1: #ffffff;
+  --hd-bg-50: rgb(240, 239, 239);
+  --hd-shadow: rgba(0, 0, 0, 0.1);
   // font
   --font-h1: 40px;
   --font-h2: 32px;
@@ -48,59 +53,41 @@
   --el-color-success: var(--hd-success);
   --el-color-warning: var(--hd-warning);
   --el-color-info: var(--hd-info);
-  --primary-text-color: var(--hd-text);
-  --blue-primary-50: #f8fbff;
-  --blue-primary-100: #e3f1ff;
-  --blue-primary-400: #464f5e;
+  --primary-text-color: var(--hd-dark);
   --blue-primary-500: var(--hd-primary);
   --table-row-bg: var(--hd-primary);
   --table-expand-row-bg: var(--hd-bg);
-  --table-expand-hover-row-bg: #c8c8c8;
-  --search-input-bg: rgba(232, 240, 254, 0.6);
-  --form-input-bg: #cfd4d785;
   --form-view-bg: var(--hd-primary);
   --el-border-radius-base: 8px;
-  --form-editable-bg: #e3eada;
-  --el-disabled-bg-color: #ececec;
-  --el-menu-hover-bg-color: none;
-  --el-bg-color: #f8f9fa;
+  --el-disabled-bg-color: var(--hd-disable);
+  --el-bg-color: var(--hd-bg-1);
+  --el-bg-color-overlay: var(--hd-bg-1);
+  --el-color-primary-light-9: var(--hd-white-50);
+  --el-fill-color-light: var(--hd-white-50);
+  --el-mask-color: color-mix(in srgb, var(--hd-white) 60%, transparent);
 }
+
+:root.dark {
+  --hd-light: #343a40;
+  --hd-text: #ffffff;
+  --hd-text-50: #ffffff82;
+  --hd-dark: #cfd3dc;
+  --hd-dark-50: #ffffff82;
+  --hd-white: #343a40;
+  --hd-white-50: #4b535b;
+  --hd-border: #ececec;
+  --hd-bg: #1d1e20;
+  --hd-bg-1: #141414;
+  --hd-bg-50: #393a3c;
+  --el-text-color-primary: #ffffff;
+  --hd-shadow: rgba(255, 255, 255, 0.323);
+  --el-mask-color: color-mix(in srgb, var(--hd-white) 30%, transparent);
+}
+
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-// badge
-.el-input__wrapper {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-.el-loading-spinner {
-  background: url('/logo.png') no-repeat;
-  background-size: 8rem 9rem;
-  background-position: 50% 50%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  top: 0 !important;
-  text-align: center;
-  animation: bounce 2s infinite;
-}
-
-.el-loading-spinner .el-loading-text {
-  margin: 3px 0;
-  font-size: 1.5rem;
-  position: absolute;
-  top: 60%;
-}
-.el-loading-spinner .circular {
-  display: none !important;
 }
 
 .el-drawer__body {

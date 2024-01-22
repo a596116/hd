@@ -1,14 +1,15 @@
 <template>
   <el-button
-    v-permission="{ currentTag: 'create', effect: 'disabled' }"
     type="primary"
     auto-insert-space
     @click="emit('on-create')"
-    class="font-normal">
-    <svg-icon name="plus" class="w-4 h-4 mr-2"></svg-icon>
+    class="border-0 font-normal">
+    <svg-icon name="plus" class="mr-2 h-4 w-4"></svg-icon>
     新 增
   </el-button>
 </template>
 <script setup lang="ts">
-const emit = defineEmits(['on-create'])
+const emit = defineEmits<{
+  (e: 'on-create'): void
+}>()
 </script>

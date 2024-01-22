@@ -1,104 +1,54 @@
 <template>
-  <div>
-    <div v-if="disabled" class="">
-      <div v-for="(item, index) in imgList" :key="index" class="">
-        <div class="flex flex-col w-full">
-          <div v-if="item?.type == 'image'" class="flex justify-center p-8">
-            <img
-              :src="item?.img"
-              :alt="item?.alt"
-              class="h-full max-h-[50px] min-h-[50px] w-full object-contain" />
+  <div class="w-full">
+    <ul ref="uploadRef" class="draggable-upload flex h-full w-full flex-wrap gap-2">
+      <li
+        v-for="(item, index) of imgList"
+        :key="index"
+        class="draggable-upload-li relative h-[160px] w-[160px] bg-hd-bg">
+        <article class="flex h-full w-full flex-col justify-between">
+          <div class="flex h-full w-full justify-center">
+            <el-image :src="item" fit="contain" class="h-full w-full"></el-image>
           </div>
-          <div class="flex max-w-[146px] items-baseline gap-x-1 bg-gray-200 px-2 py-1">
-            <small class="truncate">{{ item?.alt }}</small>
-          </div>
-        </div>
-
-        <div class="flex flex-col">
-          <div class="flex flex-col items-center w-full h-full delay-75 bg-gray-300">
-            <div class="w-full p-3">
-              <div class="flex items-baseline gap-x-1">
-                <p class="text-sm text-gray-900 truncate">
-                  {{ item?.alt }}
-                </p>
-              </div>
-            </div>
-            <div class="flex justify-center p-3 mt-auto gap-x-1">
+        </article>
+        <article
+          class="absolute top-0 flex h-full w-full flex-col opacity-0 duration-300 hover:opacity-100">
+          <div class="flex h-full w-full flex-col items-center bg-gray-100/70 delay-75">
+            <div class="mt-auto flex justify-center gap-x-1 p-3 text-white">
               <div
-                class="flex items-center justify-center w-10 h-10 bg-gray-700 rounded-lg cursor-pointer hover:bg-opacity-70"
-                @click="actions.handleDownload(item.img, item.alt)">
-                <svg-icon :name="'file-download-cloud'" class="w-5 h-5"></svg-icon>
+                class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-gray-700 hover:bg-opacity-70"
+                @click="actions.handleDownload(item, 'image')">
+                <svg-icon name="download-image" class="h-5 w-5"></svg-icon>
+              </div>
+              <div
+                v-if="!disabled"
+                class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-gray-700 hover:bg-opacity-70"
+                @click="actions.handleDelete(index)">
+                <svg-icon name="delete"></svg-icon>
               </div>
             </div>
           </div>
-        </div>
+        </article>
+      </li>
+      <div>
+        <el-upload
+          v-if="imgList.length < max"
+          class="h-[160px] w-[160px]"
+          action="#"
+          drag
+          :multiple="true"
+          :show-file-list="false"
+          :auto-upload="false"
+          :on-change="actions.handleUpload">
+          <template #trigger>
+            <div class="flex h-full w-full items-center justify-center">
+              <svg-icon name="plus"></svg-icon>
+            </div>
+          </template>
+        </el-upload>
       </div>
-    </div>
-    <div v-else class="w-full h-full">
-      <draggable
-        v-if="imgList.length > 0"
-        v-model="imgList"
-        class="h-full border-2 rounded-md"
-        ghost-class="ghost"
-        item-key="img"
-        @start="state.drag = true"
-        @end="state.drag = false"
-        @change="actions.handleUpdateList(imgList)">
-        <template #item="{ element }">
-          <section class="relative w-full h-full">
-            <article class="flex flex-col justify-between w-full h-full">
-              <div class="flex justify-center w-full h-full">
-                <el-image
-                  :src="element?.img"
-                  :alt="element?.alt"
-                  fit="contain"
-                  class="w-full h-full"></el-image>
-              </div>
-              <div
-                v-if="showAlt"
-                class="flex h-[30px] w-full items-baseline gap-x-1 bg-gray-200 px-2 py-1">
-                <small class="truncate">{{ element?.alt }}</small>
-              </div>
-            </article>
+    </ul>
 
-            <article
-              class="absolute top-0 flex flex-col w-full h-full duration-300 opacity-0 hover:opacity-100">
-              <div class="flex flex-col items-center w-full h-full delay-75 bg-gray-300/70">
-                <div class="flex justify-center p-3 mt-auto text-white gap-x-1">
-                  <div
-                    v-if="element.alt"
-                    class="flex items-center justify-center w-10 h-10 bg-gray-700 rounded-lg cursor-pointer hover:bg-opacity-70"
-                    @click="actions.handleDownload(element.img, element.alt)">
-                    <svg-icon name="download-image" class="w-5 h-5"></svg-icon>
-                  </div>
-                  <div
-                    class="flex items-center justify-center w-10 h-10 bg-gray-700 rounded-lg cursor-pointer hover:bg-opacity-70"
-                    @click="actions.handleDelete(element?.alt)">
-                    <svg-icon name="delete"></svg-icon>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </section>
-        </template>
-      </draggable>
-      <el-upload
-        v-if="imgList.length < max"
-        class="h-full"
-        action="#"
-        drag
-        :multiple="true"
-        :show-file-list="false"
-        :auto-upload="false"
-        :on-change="actions.handleUpload">
-        <template #trigger>
-          <div class="flex items-center justify-center w-full h-full">
-            <svg-icon name="plus"></svg-icon>
-          </div>
-        </template>
-      </el-upload>
-    </div>
-    <el-dialog v-model="state.dialogVisible" class="relative h-2/3">
+    <el-dialog v-model="state.dialogVisible" class="relative h-2/3 max-md:w-[95%]">
       <vue-cropper
         ref="cropper"
         :img="state.imageUrl"
@@ -129,39 +79,29 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
-import draggable from 'vuedraggable'
 import { VueCropper } from 'vue-cropper'
 import 'vue-cropper/dist/index.css'
+import Sortable from 'sortablejs'
 
-const props = defineProps({
-  title: { type: String, default: '' },
-  max: {
-    type: Number,
-    default: 10,
+const props = withDefaults(
+  defineProps<{
+    modelValue: string[]
+    max?: number
+    disabled?: boolean
+    cropper?: boolean
+  }>(),
+  {
+    modelValue: () => [],
+    max: 10,
+    disabled: false,
+    cropper: false,
   },
-  list: {
-    type: Array,
-    default: () => [],
-  },
-  param: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  showAlt: {
-    type: Boolean,
-    default: true,
-  },
-  cropper: {
-    type: Boolean,
-    default: false,
-  },
-})
-const emit = defineEmits(['update:list', 'on-change'])
+)
+// ----------- emit -----------
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: any[]): void
+}>()
+
 const state = ref({
   drag: false,
   dragOptions: {
@@ -192,27 +132,33 @@ const state = ref({
 })
 
 const cropper = ref<typeof VueCropper>()
+const uploadRef = ref<HTMLElement | null>(null)
 
-const imgList: any = computed({
-  get: () => props.list || [{ img: '', alt: '' }],
+// ----------- computed ----------
+const imgList = computed({
+  get: () => props.modelValue || [],
   set: (val) => {
-    emit('update:list', val)
-    emit('on-change', val)
+    emit('update:modelValue', val)
   },
+})
+
+onMounted(() => {
+  if (!props.disabled) {
+    actions.handleDrag()
+  }
 })
 
 const actions = {
   handleUpdateList: (list: any) => {
-    console.log(list)
-    emit('on-change', list)
+    emit('update:modelValue', list)
   },
 
   /**
    * @description 刪除檔案
    */
-  handleDelete(alt: any) {
-    const filterData = imgList.value.filter((el: any) => el?.alt != alt)
-    emit('on-change', filterData)
+  handleDelete(index: number) {
+    const filterData = imgList.value.filter((item, i) => i !== index)
+    emit('update:modelValue', filterData)
   },
   /**
    * @description 下載檔案
@@ -228,20 +174,23 @@ const actions = {
       link.click()
     } catch (error) {
       console.log(error)
-      ElMessage({
-        showClose: true,
-        message: '下載發生錯誤，請稍後再試',
-        type: 'error',
+      mesBox.error({
+        title: '下載發生錯誤，請稍後再試',
+        subTitle: '',
       })
     }
   },
 
   handleUpload: (uploadFile: any) => {
     if (uploadFile.raw?.type !== 'image/jpeg' && uploadFile.raw?.type !== 'image/png') {
-      ElMessage.error('上傳的檔案類型不符合(jpg, png)')
+      notification.error({
+        title: '上傳的檔案類型不符合(jpg, png)',
+      })
       return false
     } else if (uploadFile.raw?.size / 1024 / 1024 > 5) {
-      ElMessage.error('上傳的檔案大小不能超過 5MB')
+      notification.error({
+        title: '上傳的檔案大小不能超過 5MB',
+      })
       return false
     }
     if (props.cropper) {
@@ -250,16 +199,16 @@ const actions = {
       state.value.dialogVisible = true
     } else {
       actions.getBase64(uploadFile.raw).then((res: any) => {
-        imgList.value.push({ alt: uploadFile.raw.name, img: res })
-        emit('on-change', imgList.value)
+        imgList.value.push(res)
+        emit('update:modelValue', imgList.value)
       })
     }
   },
 
   handleCropper: () => {
     cropper.value?.getCropData(async (data: string) => {
-      imgList.value.push({ alt: state.value.imageName, img: data })
-      emit('on-change', imgList.value)
+      imgList.value.push(data)
+      emit('update:modelValue', imgList.value)
     })
     state.value.dialogVisible = false
   },
@@ -293,6 +242,26 @@ const actions = {
       u8arr[n] = bstr.charCodeAt(n)
     }
     return new Blob([u8arr], { type: mime })
+  },
+
+  handleDrag: () => {
+    const conf = {
+      animation: 250, // ms, number 单位：ms，定义排序动画的时间
+      draggable: 'li',
+      onStart: function (e: any) {
+        imgList.value.push('')
+        nextTick(() => {
+          uploadRef.value?.querySelector('li:last-child')?.classList.add('hidden')
+        })
+      },
+      onEnd({ newIndex, oldIndex }) {
+        const currentRow = imgList.value.splice(oldIndex, 1)[0]
+        imgList.value.splice(newIndex, 0, currentRow)
+        imgList.value.pop()
+        emit('update:modelValue', imgList.value)
+      },
+    }
+    Sortable.create(uploadRef.value, conf)
   },
 }
 </script>

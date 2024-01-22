@@ -2,14 +2,14 @@
 import type { Config } from 'tailwindcss'
 
 export default <Partial<Config>>{
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  // content: ['./**/*.{vue,ts}'],
   important: true,
   theme: {
     extend: {
       aspectRatio: {
         auto: 'auto',
         square: '1 / 1',
-        video: '16 / 9'
+        video: '16 / 9',
       },
       colors: {
         hd: {

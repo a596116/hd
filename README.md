@@ -7,7 +7,16 @@
 
 ## Usage
 
+#### npm
 ```sh
 npm create haodai
 ```
 
+<br/>
+
+#### pnpm
+```sh
+pnpm create haodai
+```
+<br/>
+<img src="https://i.imgur.com/3ys0z1L.png"/>

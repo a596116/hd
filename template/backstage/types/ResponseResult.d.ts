@@ -1,17 +1,17 @@
 interface responseResult<T> {
-    code: number
-    message: string
-    type: 'success' | 'error'
-    data: T
+  status: boolean
+  message: string
+  modifydate: string
+  data: T
 }
 
 interface responseData<T> {
-    code: number
-    message: string
-    type: 'success' | 'error'
-    data: T
-    current_page?: number
-    last_page?: number
-    total?: number
-    per_page?: number
+  status: boolean
+  message: string
+  modifydate: string
+  data: T
+  current_page?: number
+  last_page?: number
+  total?: number
+  per_page?: number
 }

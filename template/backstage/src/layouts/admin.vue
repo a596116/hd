@@ -1,22 +1,26 @@
 <template>
-  <div class="relative flex h-full w-full items-center gap-3 bg-hd-bg p-3 text-hd-dark">
+  <div class="relative flex h-full w-full items-center gap-3 bg-hd-bg p-3 text-hd-dark max-sm:p-1">
     <Menu />
-    <el-container class="relative grid min-h-full">
-      <div class="content grid w-full grid-rows-[auto_1fr]">
-        <NavBar />
+    <div
+      class="content grid h-full w-full grid-rows-[auto_1fr]"
+      :class="{
+        'grid-rows-[auto_auto_1fr]': menuStore.isHistoryCollapse,
+      }">
+      <NavBar />
+      <HistoryLink v-if="menuStore.isHistoryCollapse" />
 
-        <main class="main relative h-full overflow-y-auto rounded-2xl bg-hd-bg-1">
-          <router-view #default="{ Component, route }">
-            <Transition
-              appear
-              :enter-active-class="route.meta.enterClass ?? 'animate__bounceInRight'"
-              :leave-active-class="route.meta.leaveClass ?? 'animate__bounceOutLeft'">
-              <component :is="Component" class="absolute h-full w-full" />
-            </Transition>
-          </router-view>
-        </main>
-      </div>
-    </el-container>
+      <main class="main relative max-h-full overflow-y-auto rounded-2xl bg-hd-bg-1">
+        <router-view #default="{ Component, route }">
+          <component :is="Component" class="h-full w-full" />
+        </router-view>
+      </main>
+      <!-- <Transition
+        appear
+        :enter-active-class="route.meta.enterClass ?? 'animate__bounceInRight'"
+        :leave-active-class="route.meta.leaveClass ?? 'animate__bounceOutLeft'">
+        <component :is="Component" class="absolute w-full h-full" />
+      </Transition> -->
+    </div>
   </div>
 </template>
 

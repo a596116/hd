@@ -5,9 +5,9 @@
     </h5>
     <el-cascader
       ref="refCascader"
-      v-model="(selected as any)"
+      v-model="selected"
       :options="isSearch ? options : actions.handleFormatLevelOptions(options)"
-      :props="(state.props as any)"
+      :props="state.props"
       :placeholder="placeholder"
       :teleported="false"
       filterable
@@ -16,46 +16,47 @@
       :show-all-levels="showAllLevels"
       popper-class="categoryCascader"
       :disabled="disabled"
-      :size="(size as any)"
+      :size="size"
       @change="actions.handleChange">
     </el-cascader>
   </div>
 </template>
 <script setup lang="ts">
 // ----------- props -----------
-const props = defineProps({
-  checkStrictly: {
-    type: Boolean,
-    default: true,
+const props = withDefaults(
+  defineProps<{
+    checkStrictly?: boolean
+    options?: any[]
+    placeholder?: string
+    disabled?: boolean
+    showClearable?: boolean
+    showAllLevels?: boolean
+    labelText?: string
+    size?: string
+    children?: string
+    isSearch?: boolean
+  }>(),
+  {
+    checkStrictly: true,
+    options: () => [],
+    placeholder: '',
+    disabled: false,
+    showClearable: true,
+    showAllLevels: true,
+    labelText: '',
+    size: 'default',
+    children: 'sub',
+    isSearch: false,
   },
-  modelValue: {
-    type: String,
-    default: '',
-  },
-  options: {
-    type: Array,
-    default: () => [],
-  },
-  placeholder: { type: String, default: '' },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  showClearable: {
-    type: Boolean,
-    default: true,
-  },
-  showAllLevels: {
-    type: Boolean,
-    default: true,
-  },
-  labelText: { type: String, default: '' },
-  size: { type: String, default: 'default' },
-  children: { type: String, default: 'sub' },
-  isSearch: { type: Boolean, default: false },
-})
+)
 // ----------- emit -----------
-const emit = defineEmits(['on-change', 'update:modelValue'])
+const emit = defineEmits<{
+  (e: 'on-change', value: any): void
+}>()
+
+// ----------- computed ----------
+const selected = defineModel()
+
 const refCascader = ref(null)
 const state = ref({
   props: {
@@ -66,20 +67,14 @@ const state = ref({
     checkStrictly: props.checkStrictly,
   },
 })
-// ----------- computed ----------
-const selected = computed({
-  get: () => props.modelValue,
-  set: (val) => {
-    emit('update:modelValue', val)
-  },
-})
+
+// ----------- actions ----------
 const actions = {
   handleClear: () => {
     selected.value = ''
     refCascader.value.handleClear()
   },
-  handleChange: (id) => {
-    console.log(123)
+  handleChange: (id: number) => {
     let params = {
       label: '',
       value: id,

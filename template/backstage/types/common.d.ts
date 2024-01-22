@@ -26,6 +26,10 @@ interface IColumns {
   formatter?: true | false
   sort?: 'no'
   align?: 'left' | 'center' | 'right'
+  path?: string
+  params?: string
+  query?: any
+  target?: '_blank' | '_self' | '_parent' | '_top'
   type?:
     | 'image'
     | 'date'
@@ -38,6 +42,16 @@ interface IColumns {
     | 'link'
     | 'list'
     | 'status'
+    | 'money'
+}
+
+interface IRadio {
+  api: string
+  columns: IColumns[]
+  title: string
+  type?: number //刊登類型
+  selected?: any
+  search_keyword?: string
 }
 
 // errors

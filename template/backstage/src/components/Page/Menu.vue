@@ -6,9 +6,19 @@
     class="admin-menu"
     :unique-opened="true">
     <div class="my-4 flex w-full cursor-pointer items-center justify-center px-2">
-      <svg-icon name="logo" class="h-[60px] w-full" @click="handle({ route: 'admin' })"></svg-icon>
+      <transition name="slide-left-fade" mode="out-in">
+        <svg-icon
+          v-if="menuStore.isMenuCollapse"
+          name="logo"
+          class="h-[60px] w-full"
+          @click="handle({ route: 'admin' })" />
+        <svg-icon
+          v-else
+          name="logo-1"
+          class="h-[60px] w-full"
+          @click="handle({ route: 'admin' })" />
+      </transition>
     </div>
-
     <div class="px-2" v-for="(menu, index) in menuStore.menus" :key="index">
       <el-sub-menu v-if="menu.children?.length != 1" :index="menu.title!">
         <template #title>
@@ -40,10 +50,21 @@
         </template>
       </el-menu-item>
     </div>
+    <!-- <div class="flex-grow" />
+    <div class="sticky bottom-0 px-2 pb-2 bg-hd-bg-1">
+      <el-menu-item @click="" class="">
+        <section class="">
+          <svg-icon name="logout" class="w-5 h-5"></svg-icon>
+        </section>
+        <template #title>
+          <span class="mx-2 title md:mx-4">123</span>
+        </template>
+      </el-menu-item>
+    </div> -->
   </el-menu>
   <div
     v-if="menuStore.isMenuCollapse"
-    class="absolute left-0 top-0 z-10 h-full w-full bg-white/40 md:hidden"
+    class="absolute left-0 top-0 z-[20] h-full w-full bg-white/40 md:hidden"
     @click="menuStore.toggleMenu"></div>
 </template>
 
@@ -75,16 +96,21 @@ watch(
 
 <style scoped lang="scss">
 .admin-menu {
-  @apply left-0 top-0 z-[51]  h-full max-w-[210px] overflow-hidden rounded-2xl border-0 max-md:absolute
-        max-md:mt-[10px]  max-md:h-[calc(100vh-20px)];
+  @apply left-0 top-0 z-[21] flex h-full max-w-[210px] flex-col overflow-auto rounded-2xl
+        border-0 max-md:absolute max-md:mt-[10px] max-md:h-[calc(100vh-20px)];
   transition: width 0.3s ease-in-out;
   .title {
-    @apply w-[120px];
+    @apply w-[140px];
     // 超出...
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  // .el-menu-item .el-menu-tooltip__trigger,
+  // .el-menu-item,
+  // .el-sub-menu__title {
+  //   padding: auto !important;
+  // }
   .el-sub-menu__title {
     @apply relative;
     .el-sub-menu__icon-arrow {

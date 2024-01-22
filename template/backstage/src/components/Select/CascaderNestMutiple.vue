@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h5 class="text-xs leading-6 tracking-widest text-custom-gray">
+    <h5 class="text-custom-gray text-xs leading-6 tracking-widest">
       {{ labelText }}
     </h5>
     <el-cascader
@@ -16,7 +16,7 @@
       :show-all-levels="showAllLevels"
       popper-class="categoryCascader"
       :disabled="disabled"
-      :size="(size as any)"
+      :size="size"
       class="w-full"
       @change="actions.handleChange">
     </el-cascader>
@@ -24,39 +24,40 @@
 </template>
 <script setup lang="ts">
 // ----------- props -----------
-const props = defineProps({
-  checkStrictly: {
-    type: Boolean,
-    default: true,
+const props = withDefaults(
+  defineProps<{
+    checkStrictly: boolean
+    options: any[]
+    placeholder: string
+    disabled: boolean
+    showClearable: boolean
+    showAllLevels: boolean
+    labelText: string
+    size: string
+    children: string
+    isSearch: boolean
+  }>(),
+  {
+    checkStrictly: true,
+    options: () => [],
+    placeholder: '',
+    disabled: false,
+    showClearable: true,
+    showAllLevels: true,
+    labelText: '',
+    size: 'default',
+    children: 'sub',
+    isSearch: false,
   },
-  modelValue: {
-    type: Array,
-    default: [],
-  },
-  options: {
-    type: Array,
-    default: () => [],
-  },
-  placeholder: { type: String, default: '' },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  showClearable: {
-    type: Boolean,
-    default: true,
-  },
-  showAllLevels: {
-    type: Boolean,
-    default: true,
-  },
-  labelText: { type: String, default: '' },
-  size: { type: String, default: 'default' },
-  children: { type: String, default: 'sub' },
-  isSearch: { type: Boolean, default: false },
-})
+)
 // ----------- emit -----------
-const emit = defineEmits(['on-change', 'update:modelValue'])
+const emit = defineEmits<{
+  (e: 'on-change', value: any[]): void
+}>()
+
+// ----------- computed ----------
+const selected = defineModel({ required: true, default: () => [] })
+
 const refCascader = ref<any>()
 const state = ref({
   props: {
@@ -68,13 +69,8 @@ const state = ref({
     checkStrictly: props.checkStrictly,
   },
 })
-// ----------- computed ----------
-const selected = computed({
-  get: () => props.modelValue,
-  set: (val) => {
-    emit('update:modelValue', val)
-  },
-})
+
+// ----------- actions ----------
 const actions = {
   handleClear: () => {
     selected.value = []

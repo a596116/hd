@@ -1,0 +1,17 @@
+.tree-node-inner {
+  @apply cursor-pointer rounded-lg border border-gray-300  text-base duration-150 hover:scale-[1.01] hover:shadow-md;
+  &:has(.l1) {
+    @apply mt-2;
+  }
+  &.drag-placeholder-wrapper {
+    @apply border-dashed;
+  }
+}
+
+.default-draggable {
+  .action-buttons {
+    .el-button + .el-button {
+      margin-left: 0;
+    }
+  }
+}

@@ -3,7 +3,7 @@
     v-model="model"
     placeholder="選擇權限功能"
     multiple
-    class="w-full custom-input-bg-style"
+    class="custom-input-bg-style w-full"
     :disabled="canEdit">
     <el-option
       v-for="item in state.selectOptions"
@@ -14,13 +14,17 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  modelValue: { type: Array, default: [] },
-  canEdit: { type: Boolean, default: false },
-})
-const emit = defineEmits(['update:modelValue'])
+// ----------- props -----------
+const props = withDefaults(
+  defineProps<{
+    canEdit: boolean
+  }>(),
+  {
+    canEdit: false,
+  },
+)
 
-const model = useVModel(props, 'modelValue', emit)
+const model = defineModel<string[]>('modelValue', { required: true, default: () => [] })
 
 const state = reactive({
   selectOptions: [

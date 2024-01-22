@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <span class="text-xs leading-6 tracking-widest text-gray-500">{{ labelText }}</span>
-    <div class="flex items-center rounded-md border border-gray-300">
+  <div class="w-full">
+    <span class="w-full text-xs leading-6 tracking-widest text-gray-500">{{ labelText }}</span>
+    <div class="flex items-center rounded-md">
       <el-date-picker
         ref="refDatePicker"
         v-model="propsDateValue"
         :disabled="disabled"
-        :disabled-date="disabledDate"
+        :disabled-date="actions.disabledDate"
         :shortcuts="state.shortcuts"
         :clearable="clearable"
         :teleported="teleported"
-        :size="size as any"
+        :size="size"
         type="daterange"
         range-separator="-"
         start-placeholder="開始日期"
         end-placeholder="结束日期"
-        class="date-picker w-[300px]"
+        class="w-full"
         @change="actions.handleChange">
       </el-date-picker>
     </div>
@@ -26,23 +26,33 @@
 import { dayjs } from 'element-plus'
 
 // ----------- props -----------
-const props = defineProps({
-  size: { type: String, default: 'default' },
-  labelText: { type: String, default: '' },
-  dateRange: { type: Array, default: () => [] },
-  clearable: { type: Boolean, default: true },
-  isSelectBefore: { type: Boolean, default: false },
-  disabled: { type: Boolean, default: false },
-  teleported: { type: Boolean, default: false },
-})
-const emit = defineEmits(['date-change'])
+const props = withDefaults(
+  defineProps<{
+    size?: 'default' | 'small' | 'large'
+    labelText?: string
+    dateRange?: any
+    clearable?: boolean
+    isSelectBefore?: boolean
+    disabled?: boolean
+    teleported?: boolean
+  }>(),
+  {
+    size: 'default',
+    labelText: '',
+    dateRange: () => [],
+    clearable: true,
+    isSelectBefore: false,
+    disabled: false,
+    teleported: true,
+  },
+)
+
+// ----------- emit -----------
+const emit = defineEmits<{
+  (e: 'date-change', value: any): void
+}>()
 const refDatePicker = ref(null)
 
-const disabledDate = (time: Date) => {
-  const date = new Date()
-  if (!props.isSelectBefore) return
-  return time.getTime() > Date.now()
-}
 // ----------- computed ----------
 const propsDateValue = computed({
   get: () => props.dateRange,
@@ -50,6 +60,8 @@ const propsDateValue = computed({
     actions.handleChange(val)
   },
 })
+
+// ----------- state ----------
 const state = ref({
   shortcuts: [
     {
@@ -178,8 +190,11 @@ const actions = {
         end = !!val[1] ? dayjs(val[1]).format('YYYY-MM-DD') : null
       }
     }
-
     emit('date-change', { start_date: start, end_date: end })
+  },
+  disabledDate: (time: Date) => {
+    if (!props.isSelectBefore) return
+    return time.getTime() > Date.now()
   },
 }
 </script>

@@ -1,20 +1,23 @@
 interface formColumnsType {
-  label: string
-  prop: string
-  align?: 'left' | 'center' | 'right'
+  title: string
+  name: string
+  error_name?: string
+  icon?: string
   type?:
-    | 'image'
-    | 'date'
     | 'input'
-    | 'tag'
-    | 'alert'
-    | 'switch'
+    | 'textarea'
+    | 'image'
     | 'preview'
-    | 'category'
-    | 'link'
+    | 'radio'
+    | 'checkbox'
+    | 'tag'
+    | 'password'
+    | 'select'
+    | 'content'
     | 'list'
-    | 'status'
-  width?: number
-  formatter?: boolean
-  sort?: string
+  options?: any
+  readonly?: boolean
+  disabled?: boolean
+  placeholder?: string
+  value?: any
 }

@@ -1,34 +1,32 @@
 <template>
-  <footer class="z-10 w-full bg-hd-bg-1 py-4">
+  <footer class="z-10 w-full bg-hd-bg-1 py-3">
     <div class="flex items-center justify-end">
       <div v-if="!canEdit" class="flex items-center justify-end gap-x-3 px-2">
         <slot name="actions"></slot>
       </div>
 
-      <div class="flex w-full flex-grow items-center justify-end gap-x-3">
-        <div>
-          <slot name="alert"></slot>
-        </div>
-
+      <div class="flex w-full flex-grow items-center justify-end gap-x-3 px-4">
+        <slot name="button"></slot>
         <el-button
           v-show="!isSinglePage || (!isSinglePage && canEdit)"
-          size="large"
-          class="w-2/3 lg:w-2/5 lg:max-w-[120px]"
-          text
-          bg
+          v-loading="useCommonStore().loading"
+          :disabled="useCommonStore().loading"
+          size="default"
+          class="w-2/3 overflow-hidden md:max-w-[100px] lg:w-2/5"
           auto-insert-space
-          @click="actions.handleGoBack"
-          >取消</el-button
-        >
+          @click="actions.handleGoBack">
+          {{ cancelText }}
+        </el-button>
         <el-button
           v-if="canEdit"
+          v-loading="useCommonStore().loading"
+          :disabled="useCommonStore().loading"
           type="primary"
-          size="large"
-          class="w-2/3 lg:w-2/5 lg:max-w-[120px]"
+          size="default"
+          class="w-2/3 overflow-hidden md:max-w-[100px] lg:w-2/5"
           auto-insert-space
-          v-permission="disable ? { currentTag: 'root', effect: 'disabled' } : null"
           @click="emit('on-submit')">
-          確定
+          {{ submitText }}
         </el-button>
         <slot name="edit"></slot>
       </div>
@@ -36,33 +34,41 @@
   </footer>
 </template>
 <script setup lang="ts">
+import { useCommonStore } from '@/stores/common'
+
 const router = useRouter()
 const route = useRoute()
-const props = defineProps({
-  editAble: { type: Boolean, default: false },
-  isSinglePage: { type: Boolean, default: false },
-  disable: { type: Boolean, default: false },
-})
 
-const emit = defineEmits(['on-submit', 'update:editAble', 'on-cancel'])
+// ----------- props ----------
+const props = withDefaults(
+  defineProps<{
+    isSinglePage?: boolean
+    disable?: boolean
+    submitText?: string
+    cancelText?: string
+  }>(),
+  {
+    isSinglePage: false,
+    disable: false,
+    submitText: '確定',
+    cancelText: '取消',
+  },
+)
+
+// ----------- emit ----------
+const emit = defineEmits<{
+  (e: 'on-submit'): void
+  (e: 'on-cancel'): void
+}>()
+
+// ----------- computed ----------
+const propsEditAble = defineModel('editAble', { default: false })
 
 const canEdit = computed(() => {
-  return (
-    props.editAble ||
-    route.path.includes('create') ||
-    route.path.includes('edit') ||
-    route.name == 'admin/member/info' ||
-    route.name == 'admin/member/password'
-  )
+  return propsEditAble.value || route.path.includes('create') || route.path.includes('edit')
 })
 
-const propsEditAble = computed({
-  get: () => props.editAble,
-  set: (val) => {
-    emit('update:editAble', val)
-  },
-})
-
+// ----------- actions ----------
 const actions = {
   handleGoBack: () => {
     emit('on-cancel')

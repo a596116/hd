@@ -12,11 +12,11 @@ export default {
     {
       name: 'admin/dashboard',
       path: '/dashboard',
-      component: () => import('@/views/Dashboard.vue'),
+      component: () => import('@/views/index.vue'),
       meta: {
-        menu: { title: '控制台' }
-        , number: 1,
+        menu: { title: '控制台' },
+        number: 1,
       },
     },
   ],
-} as { page: any, children: RouteRecordRaw[] }
+} as { page: any; children: RouteRecordRaw[] }

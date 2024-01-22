@@ -11,7 +11,6 @@ export const useMenuStore = defineStore(
     const route = ref<RouteMeta | null>(null)
     const isMenuCollapse = ref<boolean>(false)
     const isHistoryCollapse = ref<boolean>(false)
-    const isBreadcrumbCollapse = ref<boolean>(false)
 
     const init = (page: string) => {
       getMenuByRoute(page)
@@ -30,20 +29,22 @@ export const useMenuStore = defineStore(
     const addHistoryMenu = (r: RouteLocationNormalized) => {
       if (!r.meta?.menu) return
       if (r.meta?.menu.hiddenHistory) return
-      if (!isHistoryCollapse.value) return
+      // if (!isHistoryCollapse.value) return
       route.value = r.meta
       const menu: IMenu = { ...r.meta?.menu, route: r.name as string }
       const index = Object.entries(historyMenus.value!).findIndex(
         ([key, value]) => value.route === r.name,
       )
-      if (index !== -1) historyMenus.value.splice(index, 1)
-      historyMenus.value.unshift(menu)
+      // if (index !== -1) historyMenus.value.splice(index, 1)
+      if (index == -1) historyMenus.value.unshift(menu)
+      // 從地2個位置添加
+      // if (index == -1) historyMenus.value.splice(1, 0, menu)
       if (historyMenus.value.length > 10) historyMenus.value.pop()
       historyMenus.value = [...historyMenus.value]
     }
 
     const removeHistoryMenu = (menu: IMenu) => {
-      if (historyMenus.value.length === 1) return
+      // if (historyMenus.value.length === 1) return
       const index = historyMenus.value.indexOf(menu)
       historyMenus.value.splice(index, 1)
       historyMenus.value = [...historyMenus.value]
@@ -85,37 +86,22 @@ export const useMenuStore = defineStore(
       isHistoryCollapse.value = isHistoryCollapse.value
     }
 
-    /**
-     * @description: 開關麵包屑
-     */
-    const toggleBreadcrumb = () => {
-      isBreadcrumbCollapse.value = isBreadcrumbCollapse.value
-    }
-
     return {
       menus,
       historyMenus,
       route,
       isMenuCollapse,
       isHistoryCollapse,
-      isBreadcrumbCollapse,
       init,
-      addHistoryMenu,
-      removeHistoryMenu,
       toggleMenu,
       toggleHistoryLink,
-      toggleBreadcrumb,
+      addHistoryMenu,
+      removeHistoryMenu,
     }
   },
   {
     persist: {
-      paths: [
-        'isMenuCollapse',
-        'route',
-        'isHistoryCollapse',
-        'isBreadcrumbCollapse',
-        'historyMenus',
-      ],
+      paths: ['isMenuCollapse', 'route', 'isHistoryCollapse', 'historyMenus'],
     },
   },
 )

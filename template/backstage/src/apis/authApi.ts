@@ -1,69 +1,64 @@
 import { http } from '@/plugins/axios'
 
-export interface IRegisterUser {
-  name: string
-  account: string
-  password: string
-  token?: string
-}
 export interface ILoginUser {
   account: string
   password: string
   rememberMe?: boolean
 }
 
-export interface IAlterUser {
-  id: string
-  name: string
-  account: string
+export interface IAlterUserPassword {
   password: string
-  avatar: string
+  newpassword: string
 }
 
-export interface IAlterUserPassword {
-  account: string
-  password: string
-  newPassword: string
+export interface Login {
+  token: string
+  uname: string
+  funcs: {
+    title: string
+    iconName: string
+    routerName: string
+    children: {
+      title: string
+      iconName: string
+      routerName: string
+    }[]
+  }[]
+}
+
+enum Api {
+  default = 'backstage/accounts/login',
+  logout = 'backstage/accounts/logout',
+  profile = 'backstage/users/user_funcs',
+  alterUserPassword = 'backstage/accounts/pawd',
 }
 
 class authApi {
-  // 用戶資訊
-  info(userId: number) {
-    return http.request<IUser>({
-      url: `auth/${userId ?? 0}`,
-    })
-  }
   /**
-   * 用戶登入
+   * @description: 用戶登入
    */
   login(loginForm: ILoginUser) {
-    return http.request<any>({
-      url: 'auth/login',
+    return http.request<Login>({
+      url: `${Api.default}`,
       method: 'POST',
       data: loginForm,
     })
   }
 
   /**
-   * 用戶註冊
+   * @description: 用戶登出
    */
-  regist(userForm: IRegisterUser) {
+  logout() {
     return http.request({
-      url: 'auth/register',
-      method: 'post',
-      data: { ...userForm, status: true, avatar: '0', gender: 'other', birthday: '2000-01-01' },
+      url: `${Api.logout}`,
+      method: 'POST',
     })
   }
 
-  /**
-   * 修改用戶資訊
-   * @date 2022-08-30
-   */
-  alterUserInfo(user: IAlterUser) {
-    return http.request({
-      url: `auth/alter`,
-      method: 'POST',
-      data: user,
+  profile() {
+    return http.request<Login>({
+      url: `${Api.profile}`,
+      method: 'GET',
     })
   }
 
@@ -73,43 +68,11 @@ class authApi {
    */
   alterUserPassword(user: IAlterUserPassword) {
     return http.request({
-      url: `auth/alterPassword`,
-      method: 'POST',
+      url: `${Api.alterUserPassword}`,
+      method: 'PUT',
       data: user,
     })
   }
-
-  getUser(id: string) {
-    return http.request<IUser>({
-      url: `user/${id}`,
-    })
-  }
-
-  /**
-   * 獲取註冊驗證碼
-   */
-  captcha(id?: string) {
-    return http.request({
-      url: `auth/captcha/${id ? id : '-1'}`,
-    })
-  }
-
-  verify(captcha: { captcha: string, id: string }) {
-    return http.request({
-      method: 'POST',
-      url: 'auth/captcha',
-      data: captcha
-    })
-  }
-
-  update(data: any) {
-    return http.request({
-      url: `auth/info/${data.id}`,
-      method: 'put',
-      data,
-    })
-  }
-
 }
 
 export default new authApi()

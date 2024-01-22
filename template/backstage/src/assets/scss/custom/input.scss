@@ -12,3 +12,17 @@
     background-color: transparent;
   }
 }
+.el-textarea__inner {
+  // background-color: transparent !important;
+}
+.el-input {
+  .el-input-group__append,
+  .el-input-group__prepend {
+    color: var(--hd-dark);
+  }
+}
+
+.el-input__wrapper {
+  // background-color: transparent !important;
+  // box-shadow: none !important;
+}

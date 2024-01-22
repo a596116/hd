@@ -78,15 +78,6 @@ module.exports = {
     extend: {
       colors: {
         hd: {
-          // Text: 'var(--hd-text)',
-          // HoverText: 'var(--hd-hover-text)',
-          // Color: 'var(--hd-color)',
-          // HoverColor: 'var(--hd-hover-color)',
-          // ClickColor: 'var(--hd-click-color)',
-          // Yellow: 'var(--hd-yellow)',
-          // Bg: 'var(--hd-bg)',
-          // 'Bg-1': 'var(--hd-bg-1)',
-
           primary: 'var(--hd-primary)',
           'primary-hover': 'var(--hd-primary-hover)',
           'primary-active': 'var(--hd-primary-active)',
@@ -109,6 +100,7 @@ module.exports = {
           border: 'var(--hd-border)',
           bg: 'var(--hd-bg)',
           'bg-1': 'var(--hd-bg-1)',
+          'bg-50': 'var(--hd-bg-50)',
         },
       },
       animation: {

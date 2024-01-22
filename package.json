@@ -1,6 +1,6 @@
 {
   "name": "create-haodai",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "haodai-cli",
   "type": "module",
   "bin": {

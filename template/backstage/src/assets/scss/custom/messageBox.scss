@@ -2,38 +2,42 @@
 .el-message-box {
   border-radius: 20px !important;
   overflow: initial !important;
+  border: 0 !important;
 }
 // 關閉按鈕
 .el-message-box__headerbtn {
-  @apply -right-[6px] -top-[6px] z-[100] flex rounded-[12px] text-hd-black-50 duration-150;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1) !important;
-  background-color: #fff;
+  @apply -right-[6px] -top-[6px] z-[100] flex rounded-[12px] text-hd-dark-50 duration-150;
+  box-shadow: 0 5px 20px 0 var(--hd-shadow) !important;
+  background-color: var(--hd-bg-1);
   &:hover {
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 4px 0 var(--hd-shadow);
     transform: translate(-2px, 2px);
     .el-icon {
       @apply text-hd-dark;
     }
   }
   .el-icon {
-    @apply h-[34px] w-[34px] text-hd-black-50 duration-150;
+    @apply h-[34px] w-[34px] text-hd-dark-50 duration-150;
   }
 }
 // 底部按鈕
 .el-message-box__btns {
   justify-content: flex-end !important;
   .cancelBtn {
-    @apply relative border-0 bg-transparent;
+    @apply relative overflow-hidden border-0;
+    background-color: transparent !important;
+    border: 1px solid color-mix(in srgb, var(--hd-dark-50) 20%, transparent);
     span {
       z-index: 1;
     }
     &::before {
       content: '';
-      @apply absolute left-0 top-0 z-0 h-full w-full;
-      background-color: color-mix(in srgb, var(--hd-black-50) 10%, transparent);
+      // @apply absolute left-0 top-0 z-0 h-full w-full;
+      @apply absolute -left-1 -top-1 z-0 h-[calc(100%+8px)] w-[calc(100%+8px)];
+      background-color: color-mix(in srgb, var(--hd-dark-50) 20%, transparent);
       border-radius: inherit;
       pointer-events: none;
-      transition: all 0.25s ease;
+      transition: all 0.35s ease;
       z-index: 1;
       transform: scale(0.5);
       opacity: 0;
@@ -46,21 +50,24 @@
     }
     &:hover,
     &:focus {
+      border: 1px solid color-mix(in srgb, var(--hd-dark-50) 20%, transparent);
       @apply text-hd-dark;
     }
   }
   .confirmBtn {
-    @apply relative border-0 bg-transparent text-hd-primary;
+    @apply relative overflow-hidden border-0 text-hd-primary;
+    background-color: transparent !important;
+    border: 1px solid color-mix(in srgb, var(--hd-primary) 40%, transparent);
     span {
       z-index: 1;
     }
     &::before {
       content: '';
-      @apply absolute left-0 top-0 z-0 h-full w-full;
-      background-color: color-mix(in srgb, var(--hd-primary-hover) 20%, transparent);
+      @apply absolute -left-1 -top-1 z-0 h-[calc(100%+8px)] w-[calc(100%+8px)];
+      background-color: color-mix(in srgb, var(--hd-primary) 40%, transparent);
       border-radius: inherit;
       pointer-events: none;
-      transition: all 0.25s ease;
+      transition: all 0.35s ease;
       z-index: 1;
       transform: scale(0.5);
       opacity: 0;
@@ -73,6 +80,7 @@
     }
     &:hover,
     &:focus {
+      border: 1px solid color-mix(in srgb, var(--hd-primary) 40%, transparent);
       @apply text-hd-primary;
     }
   }
